@@ -61,6 +61,7 @@ describe("Arizona Framework Plugin", function()
         )
         assert.same({ "src/parser.c" }, parser_config.install_info.files)
         assert.equals("main", parser_config.install_info.branch)
+        assert.same({ "arizona", "erlang" }, parser_config.used_by)
       else
         pending("nvim-treesitter not available in test environment")
       end

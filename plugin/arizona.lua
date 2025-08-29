@@ -27,6 +27,7 @@ local function setup_treesitter()
       branch = "main",
     },
     filetype = "arizona",
+    used_by = { "arizona", "erlang" },
   }
 end
 
