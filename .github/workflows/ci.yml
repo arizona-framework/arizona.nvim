@@ -1,0 +1,60 @@
+---
+name: CI
+
+"on":
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "*"
+  workflow_dispatch: {}
+  merge_group:
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test
+
+    runs-on: ubuntu-24.04
+
+    strategy:
+      matrix:
+        neovim-version: ['v0.9.5', 'v0.10.4', 'v0.11.3', 'stable', 'nightly']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Setup Neovim
+        uses: MunifTanjim/setup-neovim-action@5595675b7a0187e70489af966a26c43179d8ea5d # v1.1.0
+        with:
+          tag: ${{ matrix.neovim-version }}
+
+      - name: Setup dependencies
+        run: make install
+
+      - name: Run tests
+        run: make test
+
+      - name: Run health check
+        run: make health
+
+  lint:
+    name: Lint
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Check formatting with StyLua
+        uses: JohnnyMorganz/stylua-action@479972f01e665acfcba96ada452c36608bdbbb5e # v4.1.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: v2.1.0
+          args: --check .
