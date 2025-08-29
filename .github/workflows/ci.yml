@@ -1,0 +1,69 @@
+---
+name: CI
+
+"on":
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "*"
+  workflow_dispatch: {}
+  merge_group:
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
+env:
+  LUA_VERSION: "5.5"
+
+jobs:
+  test:
+    name: Test
+
+    runs-on: ubuntu-24.04
+
+    strategy:
+      matrix:
+        neovim-version: ['v0.8', 'v0.9', 'v0.10', 'stable', 'nightly']
+
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Setup Neovim
+        uses: MunifTanjim/setup-neovim-action@5595675b7a0187e70489af966a26c43179d8ea5d # v1.1.0
+        with:
+          tag: ${{ matrix.neovim-version }}
+
+      - name: Setup dependencies
+        run: make install
+
+      - name: Run tests
+        run: make test
+
+      - name: Run health check
+        run: make health
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Setup Lua
+        uses: leafo/gh-actions-lua@8aace3457a2fcf3f3c4e9007ecc6b869ff6d74d6 # v11.0.0
+        with:
+          luaVersion: ${{ env.LUA_VERSION }}
+
+      - name: Setup Luarocks
+        uses: leafo/gh-actions-luarocks@4c082a5fad45388feaeb0798dbd82dbd7dc65bca # v5
+
+      - name: Install stylua
+        run: luarocks install --server=https://luarocks.org/dev stylua
+
+      - name: Check formatting
+        run: make lint
