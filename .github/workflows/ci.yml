@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Checkout
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Setup Neovim
         uses: MunifTanjim/setup-neovim-action@5595675b7a0187e70489af966a26c43179d8ea5d # v1.1.0
@@ -52,7 +52,7 @@ jobs:
 
     steps:
       - name: Checkout
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Setup Lua
         uses: leafo/gh-actions-lua@8aace3457a2fcf3f3c4e9007ecc6b869ff6d74d6 # v11.0.0
