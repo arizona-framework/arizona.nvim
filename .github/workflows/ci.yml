@@ -15,9 +15,6 @@ concurrency:
   group: ${{github.workflow}}-${{github.ref}}
   cancel-in-progress: true
 
-env:
-  LUA_VERSION: "5.3"
-
 jobs:
   test:
     name: Test
@@ -55,16 +52,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
-      - name: Setup Lua
-        uses: leafo/gh-actions-lua@8aace3457a2fcf3f3c4e9007ecc6b869ff6d74d6 # v11.0.0
+      - name: Check formatting with StyLua
+        uses: JohnnyMorganz/stylua-action@479972f01e665acfcba96ada452c36608bdbbb5e # v4.1.0
         with:
-          luaVersion: ${{ env.LUA_VERSION }}
-
-      - name: Setup Luarocks
-        uses: leafo/gh-actions-luarocks@4c082a5fad45388feaeb0798dbd82dbd7dc65bca # v5
-
-      - name: Install stylua
-        run: luarocks install --server=https://luarocks.org/dev stylua
-
-      - name: Check formatting
-        run: make lint
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check .
