@@ -1,0 +1,108 @@
+*arizona.txt*    Arizona Framework Language Support for Neovim
+
+                    ARIZONA FRAMEWORK PLUGIN
+                      For Neovim 0.8+
+
+==============================================================================
+CONTENTS                                                    *arizona-contents*
+
+1. Introduction                                         |arizona-introduction|
+2. Installation                                         |arizona-installation|
+3. Features                                                 |arizona-features|
+4. Setup                                                       |arizona-setup|
+5. Health Check                                         |arizona-health-check|
+6. Troubleshooting                                   |arizona-troubleshooting|
+
+==============================================================================
+1. INTRODUCTION                                         *arizona-introduction*
+
+Arizona Framework is a template engine for Erlang that allows embedding
+Erlang code within HTML templates using {dynamic} syntax. This plugin
+provides Neovim language support for .herl Arizona template files.
+
+Features provided:
+• Automatic filetype detection for .herl files
+• Tree-sitter parser integration for syntax highlighting
+• Language injection for HTML and Erlang code completion
+
+==============================================================================
+2. INSTALLATION                                         *arizona-installation*
+
+Using lazy.nvim:
+>
+    {
+      'arizona-framework/arizona.nvim',
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter',
+        'jmbuhr/otter.nvim', -- Optional
+      },
+    }
+<
+
+Using packer.nvim:
+>
+    use {
+      'arizona-framework/arizona.nvim',
+      requires = {
+        'nvim-treesitter/nvim-treesitter',
+        'jmbuhr/otter.nvim', -- Optional
+      },
+    }
+<
+
+==============================================================================
+3. FEATURES                                                 *arizona-features*
+
+Filetype Detection                                   *arizona-filetype*
+    .herl files are automatically detected as 'arizona' filetype
+
+Syntax Highlighting                                  *arizona-syntax*
+    Tree-sitter parser provides rich syntax highlighting for:
+    • HTML tags and attributes
+    • Erlang code within {dynamic} blocks
+    • Arizona template structure
+
+Language Injection                                   *arizona-injection*
+    With otter.nvim, enables:
+    • HTML completion for static content
+    • Erlang completion for dynamic blocks
+    • Cross-language navigation
+
+==============================================================================
+4. SETUP                                                       *arizona-setup*
+
+No configuration required! The plugin auto-activates when installed.
+
+For full functionality:
+1. Install tree-sitter parser: :TSInstall arizona
+2. Install otter.nvim (optional, for language injection)
+3. Configure your Erlang LSP server separately
+
+==============================================================================
+5. HEALTH CHECK                                         *arizona-health-check*
+
+Run health check:
+>
+    :checkhealth arizona
+<
+
+Shows status of:
+• Filetype detection
+• Tree-sitter parser configuration
+• Language injection availability
+• Current buffer information
+
+==============================================================================
+6. TROUBLESHOOTING                                   *arizona-troubleshooting*
+
+Q: Syntax highlighting not working?
+A: Install the parser: :TSInstall arizona
+
+Q: No code completion in dynamic blocks?
+A: Install otter.nvim for language injection support
+
+Q: How to check what's working?
+A: Run :checkhealth arizona for detailed status
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
