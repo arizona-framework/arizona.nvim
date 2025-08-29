@@ -1,7 +1,7 @@
 *arizona.txt*    Arizona Framework Language Support for Neovim
 
                     ARIZONA FRAMEWORK PLUGIN
-                      For Neovim 0.8+
+                      For Neovim 0.9+
 
 ==============================================================================
 CONTENTS                                                    *arizona-contents*
