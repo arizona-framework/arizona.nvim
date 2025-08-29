@@ -23,7 +23,7 @@ jobs:
 
     strategy:
       matrix:
-        neovim-version: ['v0.9.5', 'v0.10.3', 'stable', 'nightly']
+        neovim-version: ['v0.9.5', 'v0.10.4', 'v0.11.3']
 
     steps:
       - name: Checkout
