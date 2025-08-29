@@ -71,6 +71,46 @@ require('lspconfig').elp.setup({
 })
 ```
 
+## Development
+
+To test the local plugin during development:
+
+```lua
+{
+  dir = "/path/to/arizona.nvim",
+  name = "arizona.nvim",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter",
+    "jmbuhr/otter.nvim",
+  },
+}
+```
+
+### Development Commands
+
+```bash
+# Install dependencies for local development
+make install
+
+# Run tests
+make test
+
+# Check code formatting
+make lint
+
+# Format code with stylua
+make format
+
+# Run health check
+make health
+
+# Clean temporary files
+make clean
+
+# Run all CI checks (lint + test + health)
+make ci
+```
+
 ## Troubleshooting
 
 Run `:checkhealth arizona` to see what's working and what needs setup.
