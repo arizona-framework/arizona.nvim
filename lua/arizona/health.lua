@@ -19,6 +19,15 @@ function M.check()
   if ts_ok then
     if parsers.get_parser_configs().arizona then
       health.ok("Tree-sitter parser configured")
+
+      -- Check if parser is actually installed
+      local parser_ok =
+        pcall(vim.treesitter.get_parser, vim.api.nvim_create_buf(false, true), "arizona")
+      if parser_ok then
+        health.ok("Arizona parser installed and working")
+      else
+        health.warn("Arizona parser configured but not installed - run :TSInstall arizona")
+      end
     else
       health.error("Tree-sitter parser not configured")
     end

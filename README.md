@@ -47,7 +47,7 @@ use {
 
 2. **Install otter.nvim** (for HTML/Erlang completion in template files):
    ```
-   Already listed as dependency above
+   Include jmbuhr/otter.nvim in your plugin manager dependencies
    ```
 
 3. **Check everything is working**:

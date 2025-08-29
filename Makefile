@@ -35,21 +35,23 @@ health:
 # Install development dependencies
 install:
 	@echo "Installing development dependencies..."
-	@mkdir -p ~/.local/share/nvim/site/pack/dev/start
-	@if [ ! -d ~/.local/share/nvim/site/pack/dev/start/plenary.nvim ]; then \
+	@mkdir -p ~/.local/share/nvim/site/pack/plenary/start
+	@mkdir -p ~/.local/share/nvim/site/pack/treesitter/start
+	@mkdir -p ~/.local/share/nvim/site/pack/otter/start
+	@if [ ! -d ~/.local/share/nvim/site/pack/plenary/start/plenary.nvim ]; then \
 		echo "Installing plenary.nvim..."; \
 		git clone https://github.com/nvim-lua/plenary.nvim \
-			~/.local/share/nvim/site/pack/dev/start/plenary.nvim; \
+			~/.local/share/nvim/site/pack/plenary/start/plenary.nvim; \
 	fi
-	@if [ ! -d ~/.local/share/nvim/site/pack/dev/start/nvim-treesitter ]; then \
+	@if [ ! -d ~/.local/share/nvim/site/pack/treesitter/start/nvim-treesitter ]; then \
 		echo "Installing nvim-treesitter..."; \
 		git clone https://github.com/nvim-treesitter/nvim-treesitter \
-			~/.local/share/nvim/site/pack/dev/start/nvim-treesitter; \
+			~/.local/share/nvim/site/pack/treesitter/start/nvim-treesitter; \
 	fi
-	@if [ ! -d ~/.local/share/nvim/site/pack/dev/start/otter.nvim ]; then \
+	@if [ ! -d ~/.local/share/nvim/site/pack/otter/start/otter.nvim ]; then \
 		echo "Installing otter.nvim..."; \
 		git clone https://github.com/jmbuhr/otter.nvim \
-			~/.local/share/nvim/site/pack/dev/start/otter.nvim; \
+			~/.local/share/nvim/site/pack/otter/start/otter.nvim; \
 	fi
 	@echo "Dependencies installed!"
 
